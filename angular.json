@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-bulma": {
+    "kupshred": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-bulma",
+            "outputPath": "dist/kupshred",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,12 +25,19 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "xlsx.full.min.js",
+                "input": "./node_modules/xlsx/dist",
+                "output": "./scripts/xlsx/"
+              }
             ],
             "styles": [
               "src/scss/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+
+            "webWorkerTsConfig": "tsconfig.worker.json"
           },
           "configurations": {
             "production": {
@@ -62,18 +69,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-bulma:build"
+            "browserTarget": "kupshred:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-bulma:build:production"
+              "browserTarget": "kupshred:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-bulma:build"
+            "browserTarget": "kupshred:build"
           }
         },
         "test": {
@@ -85,12 +92,18 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "xlsx.full.min.js",
+                "input": "./node_modules/xlsx/dist",
+                "output": "./scripts/xlsx/"
+              }
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "webWorkerTsConfig": "tsconfig.worker.json"
           }
         },
         "lint": {
@@ -99,7 +112,8 @@
             "tsConfig": [
               "tsconfig.app.json",
               "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "e2e/tsconfig.json",
+              "tsconfig.worker.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -110,15 +124,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-bulma:serve"
+            "devServerTarget": "kupshred:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-bulma:serve:production"
+              "devServerTarget": "kupshred:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "angular-bulma"
+  "defaultProject": "kupshred"
 }
