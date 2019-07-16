@@ -1,6 +1,6 @@
 {
-  "name": "angular-bulma",
-  "version": "0.0.0",
+  "name": "kupshred",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

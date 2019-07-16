@@ -6,7 +6,7 @@ declare function importScripts(...urls: string[]): void;
 declare function postMessage(message: any): any;
 
 
-// Declare the library object so the script can be compiled without any problem
+// Declare the library object so the script can be compiled without problems
 declare const XLSX: any;
 
 addEventListener('message', ({ data }) => {
@@ -21,7 +21,9 @@ addEventListener('message', ({ data }) => {
     importScripts(str);
 
     const xls = XLSX.read(data.file, { type: 'array' });
+
     const sheet = xls.Sheets[xls.SheetNames[0]];
+
     console.log(sheet);
     // console.log(sheet['!cols']);
 
@@ -156,7 +158,6 @@ addEventListener('message', ({ data }) => {
     //     }
     // }
 
-
     // scanRange = XLSX.utils.decode_range(sheet['!ref']);
 
     // for (let R = scanRange.s.r; R <= scanRange.e.r; ++R) {
@@ -174,18 +175,12 @@ addEventListener('message', ({ data }) => {
     //     if (!amCell) { amCell = sheet['AM' + (R + 1)] = { t: 's' }; }
     //     amCell.v = data.val.am;
 
-
-
     // }
-
 
     // sheet['!ref'] = 'A1:AM' + scanRange.e.r + 1;
 
-    // hiddenRows.forEach(i => sheet['!cols'][i] = { hidden: true });
-
-
-
     postMessage(xls);
+
 });
 
 
