@@ -20,12 +20,12 @@ export class XlsService {
                 type: 'module'
             });
             const reader: FileReader = new FileReader();
-            reader.readAsBinaryString(file);
-            reader.onload = (e: any) => {
+            reader.readAsArrayBuffer(file);
+            reader.onloadend = (e: any) => {
                 worker.onmessage = ({ data }) => {
                     XLSX.writeFile(data, file.name);
                 };
-                worker.postMessage({ file: e.target.result, locale: loc, val: values, window: this.inputWindow });
+                worker.postMessage({ file: new Uint8Array(e.target.result), locale: loc, val: values, window: this.inputWindow });
             };
         });
     }
